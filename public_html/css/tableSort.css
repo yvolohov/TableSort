@@ -1,0 +1,10 @@
+body 
+{
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+}
+table, table *
+{
+    border: dotted 1px #CCCCCC;
+    border-spacing: 2px;
+}

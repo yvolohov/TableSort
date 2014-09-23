@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Сортировщик таблиц</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="css/tableSort.css" rel="stylesheet" type="text/css"/>
+        <script src="js/jquery-2.1.1.js" type="text/javascript"></script>
+        <script src="js/tableSort.js" type="text/javascript"></script>
+    </head>
+    <body>
+        Order by:
+        <select id="ts_sort_list">
+            <option value="0">num (ASC)</option>
+            <option value="100">num (DESC)</option>            
+            <option value="1">country (ASC)</option>
+            <option value="101">country (DESC)</option>            
+            <option value="2">city (ASC)</option>
+            <option value="102">city (DESC)</option>            
+            <option value="3">name (ASC)</option>
+            <option value="103">name (DESC)</option>            
+            <option value="4">height (ASC)</option>
+            <option value="104">height (DESC)</option>            
+        </select>
+        <br/><br/>
+        <table id="ts_megastructures">
+            <tr>
+                <th>Num</th>
+                <th>Country</th>
+                <th>City</th>
+                <th>Stucture</th>
+                <th>Height</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>United Arab Emirates</td>
+                <td>Dubai</td>
+                <td>Burj Khalifa</td>
+                <td>829.8</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Japan</td>
+                <td>Tokyo</td>
+                <td>Tokyo Sky Tree</td>
+                <td>634</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>United States</td>
+                <td>Blanchard, North Dakota</td>
+                <td>KVLY-TV mast</td>
+                <td>628.8</td>
+            </tr>            
+            <tr>
+                <td>4</td>
+                <td>Saudi Arabia</td>
+                <td>Mecca</td>
+                <td>Abraj Al Bait Towers</td>
+                <td>601</td>
+            </tr> 
+            <tr>
+                <td>5</td>
+                <td>United States</td>
+                <td>Lualualei, Hawaii</td>
+                <td>Lualualei VLF transmitter</td>
+                <td>458</td>
+            </tr>             
+        </table>
+        <script type="text/javascript">
+            $(function()
+            {
+                var srt = new yvTableSorter("#ts_megastructures", 1);               
+                
+                $("#ts_sort_list").on("click", null, null, function()
+                {
+                    var value = Number($("#ts_sort_list").prop("value"));                    
+                    var colIndex = (value >= 100) ? value - 100 : value;
+                    var type = (colIndex === 0 || colIndex === 4) 
+                        ? srt.NUMBER : srt.STRING;
+                    var direction = (value >= 100) ? srt.DESC : srt.ASC;
+                    srt.sort(colIndex, type, direction);
+                });
+            });
+        </script>    
+    </body>
+</html>
